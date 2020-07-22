@@ -1,0 +1,42 @@
+#newFavorPage {
+  padding: 50px;
+}
+#newFavorForm fieldset {
+  background: white;
+  border: none;
+  border-radius: 5px;
+}
+#newFavorForm legend {
+  background: #999;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+.inputSect {
+  margin: 20px;
+}
+
+.inputSect input{
+  display: block;
+  padding: 10px;
+  width: 50%;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+}
+.inputSect textarea {
+  display: block;
+  padding: 10px;
+  height: 150px;
+  width: 90%;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+}
+.inputSect select {
+  color: #555;
+  display: block;
+  padding: 10px;
+  width: 90%;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+}

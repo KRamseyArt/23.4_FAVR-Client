@@ -1,0 +1,35 @@
+#RankMeter {
+  margin: 20px auto;
+  display: flex;
+  background: white;
+  padding: 10px 0;
+}
+
+.meter {
+  align-self: center;
+  height: 20px;
+  background: #555;
+  width: 100%;
+}
+#Completed {
+  background: limegreen;
+  margin-left: 0;
+}
+#ToDo {
+  background: green;
+  margin-left: 0;
+}
+#Pending {
+  background: rgb(54, 131, 231);
+  margin-right: 0;
+}
+#Done4Me {
+  background: rgb(115, 186, 243);
+  margin-right: 0;
+}
+
+#rankBadge {
+  background: orange;
+  padding: 10px 20px;
+  border-radius: 5px;
+}

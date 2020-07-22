@@ -1,0 +1,10 @@
+.favorList {
+  background: white;
+  height: 100%;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+.favorList ul {
+  padding: 0;
+}

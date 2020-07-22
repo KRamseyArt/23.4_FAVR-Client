@@ -1,0 +1,22 @@
+#profileFavors {
+  display: block;
+}
+.reminder {
+  flex: 2;
+  
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.done {
+  background: limegreen;
+}
+.toDo {
+  background: green;
+}
+.pending {
+  background: rgb(54, 131, 231);
+}
+.done4me {
+  background: rgb(115, 186, 243);
+}

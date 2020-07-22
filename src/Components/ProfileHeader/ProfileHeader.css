@@ -1,0 +1,14 @@
+#EditProfileBtn {
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  border: none;
+}
+#EditProfileBtn:hover {
+  background: #ddd;
+  cursor: pointer;
+}

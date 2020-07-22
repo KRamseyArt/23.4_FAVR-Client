@@ -1,0 +1,13 @@
+#HomeInfo {
+  padding: 0;
+  margin: 10px 50px;
+}
+#HomeInfo li {
+  list-style-type: none;
+  line-height: 3rem;
+  margin: 10px auto 50px auto;
+}
+#HomeInfo li h3 {
+  background: #999;
+  color: white;
+}

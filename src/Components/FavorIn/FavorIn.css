@@ -1,0 +1,41 @@
+.Favor {
+  list-style-type: none;
+  margin: 20px;
+  background: #ddd;
+  border-radius: 5px;
+  display: flex;
+  min-width: 300px;
+  height: 100%;
+  position: relative;
+}
+.favorInfo {
+  align-self: center;
+  margin: 10px auto;
+  max-width: 60%;
+}
+.favorComplete {
+  position: absolute;
+  height: 100%;
+  width: 50px;
+  background: green;
+  margin-left: 0;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+.favorComplete:hover {
+  cursor: pointer;
+  background: darkgreen;
+}
+.favorQuit {
+  position: absolute;
+  height: 100%;
+  width: 50px;
+  background: crimson;
+  right: 0;
+  border: none;
+  border-radius: 0 5px 5px 0;
+}
+.favorQuit:hover {
+  cursor: pointer;
+  background: darkred;
+}

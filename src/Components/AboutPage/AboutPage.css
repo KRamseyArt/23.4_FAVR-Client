@@ -1,0 +1,50 @@
+#AboutPage {
+  display: flex;
+  padding: 20px 10px;
+}
+
+#profileCard {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  height: 100%;
+}
+#profileContact {
+  margin: 20px auto;
+}
+#profileContact p {
+  color: #999;
+}
+#profileImg {
+  background: url("https://via.placeholder.com/150/ddd/ddd?text=IMG");
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+}
+#aboutInfo {
+  padding: 0;
+}
+#aboutInfo li {
+  margin: 10px auto;
+  list-style-type: none;
+}
+#aboutInfo li button {
+  width: 70%;
+}
+
+#aboutDetails {
+  max-width: 55%;
+  background: white;
+  padding: 30px;
+  border-radius: 5px;
+}
+#aboutDetails ul {
+  padding: 0;
+}
+#aboutDetails ul li {
+  list-style-type: none;
+  text-align: left;
+  /* max-width: 35ch; */
+  margin: 20px auto 40px auto;
+  line-height: 2rem;
+}
