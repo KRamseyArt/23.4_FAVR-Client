@@ -1,53 +1,88 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './FavorIn.css'
-import STORE from '../../STORE'
-import Context from '../../Context'
+import './FavorIn.css';
+import Context from '../../Context';
 
 export class FavorIn extends Component {
   static contextType = Context;
   
   static defaultProps = {
-    title: "",
-    from: null,
-    date_asked: null
+    favor: {
+      favor_title: "",
+      favor_content: "",
+      from_user_id: null,
+      date: new Date()
+    }
   }
 
-  getUsername = () => {
-    let askedByID = STORE.users.filter(u =>
-        u.id === this.props.from
-      )[0]
+  state = {
+    viewDetails: false,
+  }
+
+  getUsername = () => {    
+    console.log(this.context.allUsers);
+    let askedByID = this.context.allUsers.filter(u => 
+      u.id === this.props.favor.from_user_id
+    )[0] || { username: "Null" };
+    
 
     return askedByID.username;
   }
+  toggleDetails = () => {
+    this.setState({
+      viewDetails: !this.state.viewDetails
+    })
+  }
+  renderDetailTag = () => {
+    return (
+      <div className="detailTag">
+        <p>{this.props.favor.favor_content}</p>
+      </div>
+    );
+  }
 
   render() {
-    const favor = this.props;
+    const favor = this.props.favor;
     const askedBy = this.getUsername();
+    const formattedDate = new Date(favor.assigned_date).toLocaleDateString();
 
     return (
       <li className="Favor">
-        <button
-          className="favorComplete"
-          onClick={() => this.context.completeFavor(favor.id)}
-        >
-          O
-        </button> 
-        <div className="favorInfo">
-        <p>{askedBy} Asked You to...</p>
-        <h4>{favor.title}</h4>
-          
-          <p>{favor.date_asked}</p>
+        <div className="simpleTag">
+          <button
+            className="favorComplete"
+            onClick={() => this.context.completeFavor(favor)}
+          >
+            O
+          </button> 
+          <div className="favorInfo">
+            <p className="dateAsked">{formattedDate}</p>
+            <div className="infoText">
+              <p><span className="altUser">{askedBy}</span> asked you to...</p>
+              <h4>{favor.favor_title}</h4>
+            </div>
+            
+            <button
+              className="details btn"
+              onClick={() => this.toggleDetails()}
+            >
+              View Details...
+            </button>
+          </div>
+          <button
+            className="favorQuit"
+            onClick={() => this.context.cancelFavor(favor.id)}
+          >
+            X
+          </button>
         </div>
-        <button
-          className="favorQuit"
-          onClick={() => this.context.cancelFavor(favor.id)}
-        >
-          X
-        </button>
+        { this.state.viewDetails
+          ? this.renderDetailTag()
+          : <></>
+        }
       </li>
     )
   }
 }
 
-export default FavorIn
+export default FavorIn;

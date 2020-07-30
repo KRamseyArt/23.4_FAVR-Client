@@ -1,18 +1,73 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import './SignUpPage.css';
+import AuthApiService from '../../Services/auth-api-service';
+import ValidationError from '../ValidationError/ValidationError';
 
 export class SignUpPage extends Component {
+  static defaultProps = {
+    history: {
+      push: () => {},
+    }
+  }
+
+  state = {
+    error: null
+  }
+
+  handleRegistrationSuccess = () => {
+    const { history } = this.props;
+    history.push(`/log-in`);
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { username, email, password, vPassword } = e.target;
+
+    this.setState({ error: null });
+    if (password !== vPassword){
+      this.setState({ error: `Passwords do not match` });
+    }
+
+    AuthApiService.postUser({
+      username: username.value,
+      password: password.value,
+      email: email.value,
+    })
+      .then(user => {
+        username.value = "";
+        email.value = "";
+        password.value = "";
+        vPassword.value = "";
+        
+        this.handleRegistrationSuccess();
+      })
+      .catch(res => {
+        this.setState({
+          error: res.error
+        });
+      });
+  }
+  
   render() {
+    const { error } = this.state;
     return (
       <div id="accountPage">
         <form
           id="accountForm"
+          onSubmit={this.handleSubmit}
         >
           <fieldset>
             <legend>
               Create a New Account:
             </legend>
+            {error && (
+              <ValidationError message={error}>
+                <div>
+                  Sign-up form meets requirements
+                </div>
+              </ValidationError>
+            )}
             <div className="inputSect">
               <label htmlFor="username">
                 Username *
@@ -52,7 +107,7 @@ export class SignUpPage extends Component {
               </label>
               <input
                 required
-                type="text"
+                type="password"
                 id="vPassword"
                 name="vPassword"
               />
@@ -67,8 +122,8 @@ export class SignUpPage extends Component {
           </fieldset>
         </form>
       </div>
-    )
+    );
   }
 }
 
-export default SignUpPage
+export default SignUpPage;

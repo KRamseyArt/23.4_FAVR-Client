@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import './HomePage.css';
 import Hero from '../Hero/Hero';
 
-import Context from '../../Context'
+import Context from '../../Context';
 
 export class HomePage extends Component {
   static contextType = Context;
@@ -35,8 +35,8 @@ export class HomePage extends Component {
           </li>
         </ul>
       </div>
-    )
+    );
   }
 }
 
-export default HomePage
+export default HomePage;

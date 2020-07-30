@@ -1,0 +1,13 @@
+#demoCredentials {
+  background: white;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 5px;
+}
+#demoCredentials h4 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+#demoCredentials span {
+  font-weight: bold;
+}

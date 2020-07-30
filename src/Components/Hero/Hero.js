@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './Hero.css'
+import './Hero.css';
 
 export class Hero extends Component {
   render() {
@@ -9,8 +9,8 @@ export class Hero extends Component {
         <h1>FAVR</h1>
         <p>Making it personal</p>
       </div>
-    )
+    );
   }
 }
 
-export default Hero
+export default Hero;

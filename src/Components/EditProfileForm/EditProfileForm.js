@@ -1,25 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './EditProfileForm.css'
-import Context from '../../Context'
+import './EditProfileForm.css';
+import Context from '../../Context';
 
 export class EditProfileForm extends Component {
-  static contextType = Context
+  static contextType = Context;
   
   constructor(props){
     super(props);
     this.state = {
       edit: true
-    }
+    };
   }
 
   toggleEditProfile = () => {
-    let { edit } = this.state;
     this.setState({ edit: !this.state.edit });
   }
   editProfile = () => {
     if (this.state.edit === true){
-      return <EditProfileForm />
+      return <EditProfileForm />;
     } else {
       return (
         <button
@@ -28,14 +27,8 @@ export class EditProfileForm extends Component {
         >
           +
         </button>
-      )
+      );
     }
-  }
-
-  handleSubmit = (e) => {
-    // e.preventDefault;
-
-    // this.toggleEditProfile();
   }
 
   render() {
@@ -64,6 +57,12 @@ export class EditProfileForm extends Component {
             />
           </div>
 
+          <button
+            className="btn"
+            onClick={() => this.toggleEditProfile()}
+          >
+            Cancel
+          </button>
           <input
             type="submit"
             value="Submit"
@@ -75,4 +74,4 @@ export class EditProfileForm extends Component {
   }
 }
 
-export default EditProfileForm
+export default EditProfileForm;

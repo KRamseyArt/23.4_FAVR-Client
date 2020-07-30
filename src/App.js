@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router'
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router';
 
-import './App.css'
+import './App.css';
 import STORE from './STORE';
+import Config from './Config';
 import Context from './Context';
 
 import NavBar from './Components/NavBar/NavBar';
@@ -13,82 +14,187 @@ import SignUpPage from './Components/SignUpPage/SignUpPage';
 import FavorsPage from './Components/FavorsPage/FavorsPage';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
 import NewFavorPage from './Components/NewFavorPage/NewFavorPage';
+import NotFoundPage from './Components/NotFoundPage/NotFoundPage';
 import Footer from './Components/Footer/Footer';
+import TokenService from './Services/token-service';
+import idleService from './Services/idle-service';
 
 
 export class App extends Component {
   state = {
     user: {},
+    allUsers: [],
     favors: []
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentWillUnmount() {
+    idleService.unRegisterIdleResets();
+    TokenService.clearCallbackBeforeExpiry();
+  }
+
+  logoutFromIdle = () => {
+    TokenService.clearAuthToken();
+    TokenService.clearCallbackBeforeExpiry();
+    idleService.unRegisterIdleResets();
+
+    this.forceUpdate();
   }
   
   componentDidMount() {
-    const user = STORE.users[0]
-    this.setState({
-      user
-    });
+    idleService.setIdleCallback(this.logoutFromIdle);
+    
+    if (TokenService.hasAuthToken()){
+      idleService.registerIdleTimerResets();
+      this.handleSuccessfulLogin();
+    }
 
-    const favors = STORE.favors
-    this.setState({
-      favors
-    })
+    fetch(`${Config.API_ENDPOINT}/users`)
+      .then(res => {
+        
+        if(!res.ok){
+          return res
+            .json()
+            .then(e => Promise.reject(e));
+        }
+
+        return res.json()
+      })
+      .then(allUsers => {
+        this.getAllUsers(allUsers);
+      })
+      .catch(error => {
+        console.error({error});
+      });
   }
 
   setUser = (user) => {
     this.setState({
       user
-    })
+    });
+  }
+  getAllUsers = (allUsers) => {
+    this.setState({
+      allUsers
+    });
   }
   addFavor = (favor) => {
     this.setState({
       favors: [...this.state.favors, favor]
-    })
+    });
   }
   setFavors = (favors) => {
     this.setState({
       favors
-    })
+    });
   }
   cancelFavor = (favorId) => {
     this.state.favors.map(f => {
       if (f.id === favorId){
         f.cancelled = true;
       }
-    })
+    });
     this.setState({
       favors: [...this.state.favors]
-    })
-    
-    // this.setState({
-    //   favors: [...this.state.favors, favor]
-    // })
+    });
   }
-  completeFavor = (favorId) => {
-    this.state.favors.map(f => {
-      if (f.id === favorId){
-        f.completed = true;
+  deleteFavor = (favorId) => {
+    fetch (`${Config.API_ENDPOINT}/favors/${favorId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
       }
     })
-    this.setState({
-      favors: [...this.state.favors]
+      .then(res => {
+        this.setState({
+          favors: this.state.favors.filter(f =>
+            f.id !== favorId  
+          )
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
+  completeFavor = (favor) => {
+    const favorPatch = {
+      id: favor.id,
+      completed: true,
+      cancelled: favor.cancelled,
+      end_date: new Date()
+    }
+
+    console.log(favorPatch);
+
+    fetch (`${Config.API_ENDPOINT}/favors/${favor.id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify({ favorPatch })
+        
     })
-    // this.setState({
-    //   favors: [...this.state.favors, favor]
-    // })
+      .then(res => {
+        this.setState({
+          favors: [...this.state.favors]
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      })
   }
 
+  handleSuccessfulLogin = () => {
+    if (TokenService.hasAuthToken()){
+      const ENDPOINT = Config.API_ENDPOINT;
+
+      Promise.all([
+        fetch(`${ENDPOINT}/users/${TokenService.readJwtToken().user_id}`),
+        fetch(`${ENDPOINT}/users/${TokenService.readJwtToken().user_id}/favors`),
+      ])
+        .then(([ userRes, favorsRes]) => {
+          if (!userRes.ok){
+            return userRes
+              .json()
+              .then(e => Promise.reject(e));
+          }
+          if (!favorsRes.ok){
+            return favorsRes
+              .json()
+              .then(e => Promise.reject(e));
+          }
+          return Promise.all([userRes.json(), favorsRes.json()]);
+        })
+        .then(([ user, favors ]) => {
+          this.setUser(user);
+          this.setFavors(favors);
+        })
+        .catch(error => {
+          console.error({ error });
+        })
+    }
+  }
   render() {
     console.log(this.state);
 
     const contextValue = {
       user: this.state.user,
+      allUsers: this.state.allUsers,
       favors: this.state.favors,
       addFavor: this.addFavor,
       setUser: this.setUser,
       setFavors: this.setFavors,
+      getAllUsers: this.getAllUsers,
       cancelFavor: this.cancelFavor,
-      completeFavor: this.completeFavor
-    }
+      deleteFavor: this.deleteFavor,
+      completeFavor: this.completeFavor,
+      handleSuccessfulLogin: this.handleSuccessfulLogin,
+    };
     
     return (
       <Context.Provider
@@ -107,7 +213,7 @@ export class App extends Component {
               component={ FavorsPage }
             />
             <Route
-              path='/my-profile'
+              path='/users/:userId'
               component={ ProfilePage }
             />
             <Route
@@ -127,6 +233,9 @@ export class App extends Component {
               path='/'
               component={ HomePage }
             />
+            <Route
+              component={ NotFoundPage }
+            />
           </Switch>
 
           <Footer />
@@ -136,4 +245,4 @@ export class App extends Component {
   }
 }
 
-export default App
+export default App;

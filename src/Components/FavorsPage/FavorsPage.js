@@ -1,30 +1,14 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import './FavorsPage.css'
-import Context from '../../Context'
+import './FavorsPage.css';
+import Context from '../../Context';
 
-import FavorIn from '../FavorIn/FavorIn'
-import FavorOut from '../FavorOut/FavorOut'
+import FavorIn from '../FavorIn/FavorIn';
+import FavorOut from '../FavorOut/FavorOut';
 
 export class FavorsPage extends Component {
   static contextType = Context;
-
-  renderFavors = () => {
-    let userFavors = this.context.favors.filter(f => {
-      if (f.to_user_id === this.context.user.id){
-        return (
-          <FavorIn
-            favorTitle={f.favor_title}
-            askedBy={f.from_user_id}
-            dateAsked={f.date_asked}
-          />
-        )
-      }
-    });
-
-    return userFavors;
-  }
 
   render() {
 
@@ -45,9 +29,7 @@ export class FavorsPage extends Component {
                   <FavorIn
                     id={f.id}
                     key={f.id}
-                    title={f.favor_title}
-                    from={f.from_user_id}
-                    date={f.date_asked}
+                    favor={f}
                   />
                 )
               }
@@ -73,8 +55,9 @@ export class FavorsPage extends Component {
                       id={f.id}
                       key={f.id}
                       title={f.favor_title}
+                      content={f.favor_content}
                       to={f.to_user_id}
-                      date={f.date_asked}
+                      assigned_date={f.assigned_date}
                     />
                   )
                 }
@@ -86,4 +69,4 @@ export class FavorsPage extends Component {
   }
 }
 
-export default FavorsPage
+export default FavorsPage;

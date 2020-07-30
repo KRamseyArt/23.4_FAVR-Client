@@ -1,64 +1,67 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './RankMeter.css'
-import Context from '../../Context'
-import { useParams } from 'react-router';
+import './RankMeter.css';
+import Context from '../../Context';
 
 export class RankMeter extends Component {
   static contextType = Context;
 
 
   getTotalFavors = () => {
+    // returns total favors asked by user of others(out), and asked by others of user(in)
     const favorsFromMe = this.context.favors.filter(f => 
       f.from_user_id === this.context.user.id
-    )
+    );
     const favorsToMe = this.context.favors.filter(f =>
       f.to_user_id === this.context.user.id  
-    )
-    // console.log(`Total Favors: ${favorsFromMe.length + favorsToMe.length}`)
+    );
     return favorsFromMe.length + favorsToMe.length;
   }
   percentDone = () => {
+    // returns percent of favors user has completed out of total favors in/out
     let totalFavors = this.getTotalFavors();
     let favorsGivenToMe = this.context.favors.filter(f => 
       f.to_user_id === this.context.user.id
-    )
+    );
     let favorsDone = favorsGivenToMe.filter(f =>
       f.completed === true
-    )
-    console.log(`Percent of Favors I Completed: ${Math.floor(favorsDone.length / totalFavors * 100)}%`)
+    );
+    // console.log(`Percent of Favors I Completed: ${Math.floor(favorsDone.length / totalFavors * 100)}%`);
     return Math.floor(favorsDone.length / totalFavors * 100);
   }
   percentToDo = () => {
+    // returns percent of favors user has left to do (not marked 'completed' or 'cancelled') out of total favors in/out
     let totalFavors = this.getTotalFavors();
     let favorsAsked = this.context.favors.filter(f => 
       f.to_user_id === this.context.user.id
       && f.completed === false
       && f.cancelled === false
-    )
-    console.log(`Percent of Favors I Need to Do: ${favorsAsked.length/totalFavors * 100}%`);
+    );
+    // console.log(`Percent of Favors I Need to Do: ${favorsAsked.length/totalFavors * 100}%`);
     return Math.floor(favorsAsked.length/totalFavors * 100);
   }
   percentPending = () => {
+    // returns percent of favors user has asked of others out of total favors in/out
     let totalFavors = this.getTotalFavors();
     let favorsAsked = this.context.favors.filter(f => 
       f.from_user_id === this.context.user.id
       && f.completed === false
       && f.cancelled === false
-    )
+    );
 
-    console.log(`Percent of Favors I've Asked for: ${favorsAsked.length/totalFavors * 100}%`)
+    // console.log(`Percent of Favors I've Asked for: ${favorsAsked.length/totalFavors * 100}%`);
     return Math.floor(favorsAsked.length/totalFavors * 100);
   }
   percentDone4Me = () => {
+    // returns percent of total favors in/out that user asked of others that were marked 'completed'
     let totalFavors = this.getTotalFavors();
     let favorsAsked = this.context.favors.filter(f => 
       f.from_user_id === this.context.user.id
-    )
+    );
     let favorsDone = favorsAsked.filter(f =>
       f.completed === true
-    )
-    console.log(`Percent of Favors Others Completed For Me: ${Math.floor(favorsDone.length / totalFavors * 100)}%`)
+    );
+    // console.log(`Percent of Favors Others Completed For Me: ${Math.floor(favorsDone.length / totalFavors * 100)}%`);
     return Math.floor(favorsDone.length / totalFavors * 100);
   }
 
@@ -66,11 +69,13 @@ export class RankMeter extends Component {
     let title = "";
 
     if (this.percentDone() + this.percentToDo() > this.percentPending() + this.percentDone4Me()){
-      title = "Do-er"
+      title = "Do-er";
     } else if (this.percentDone() + this.percentToDo() < this.percentPending() + this.percentDone4Me()) {
-      title = "Task-er"
+      title = "Task-er";
+    } else if (this.percentDone() + this.percentToDo() === this.percentPending() + this.percentDone4Me()) {
+      title = "Equalizer";
     } else {
-      title = "Equalizer"
+      title = "Undefined";
     }
 
     return title;
@@ -114,4 +119,4 @@ export class RankMeter extends Component {
   }
 }
 
-export default RankMeter
+export default RankMeter;

@@ -25,3 +25,7 @@
   cursor: pointer;
   background: #555;
 }
+.btn:disabled {
+  cursor: default;
+  background: black;
+}

@@ -1,0 +1,64 @@
+.FavorOut {
+  list-style-type: none;
+}
+.simpleTagOut {
+  margin: 20px 20px 0 20px;
+  background: #ddd;
+  border-radius: 5px;
+  display: flex;
+  min-width: 300px;
+  height: 100%;
+  position: relative;
+  /* display: flex; */
+}
+.dateOutAsked {
+  background: cornflowerblue;
+  color: white;
+  min-width: 300px;
+  padding: 5px 10px;
+  border-radius: 5px 5px 0 0;
+  text-align: left;
+}
+.favorOutInfo {
+  align-self: center;
+  min-width: 100%;
+}
+.infoOutText {
+  max-width: calc(100% - 55px);
+  margin: 10px;
+}
+.infoOutText p, .infoOutText h4 {
+  text-align: left;
+}
+.altUser {
+  font-weight: bold;
+  color: blue;
+}
+.favorOutQuit {
+  position: absolute;
+  height: 100%;
+  width: 50px;
+  background: crimson;
+  right: 0;
+  border: none;
+  border-radius: 0 5px 5px 0;
+}
+.favorOutQuit:hover {
+  cursor: pointer;
+  background: darkred;
+}
+
+.detailsOut {
+  margin: 0px;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+}
+.detailTag {
+  background: #555;
+  color: white;
+  margin: -5px 20px;
+  border: #555;
+  min-width: 300px;
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+}

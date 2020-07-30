@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './NewFavorPage.css'
-import STORE from '../../STORE'
-import Context from '../../Context'
+import './NewFavorPage.css';
+import Config from '../../Config';
+import Context from '../../Context';
+
+import ValidationError from '../ValidationError/ValidationError';
+import TokenService from '../../Services/token-service';
 
 export class NewFavorPage extends Component {
   static contextType = Context;
@@ -22,25 +25,44 @@ export class NewFavorPage extends Component {
         value: "",
         touched: false
       }
-    }
+    };
   }
 
   handleSubmit = e => {
     e.preventDefault();
 
-    const { favor_title, favor_content, to_user_id } = this.state;
-    const from_user_id = this.context.user.id;
-    const cancelled = false;
-    const completed = false;
-    const date_asked = new Date().toLocaleString();
-    const id = Math.floor(Math.random() * 1000);
+    const favor_title = this.state.favor_title.value;
+    const favor_content = this.state.favor_content.value;
+    const to_user_id = this.state.to_user_id.value;
+    const from_user_id = TokenService.readJwtToken().user_id;
+    // const assigned_date = new Date().toLocaleString();
 
-    const newFavor = { id, favor_title, date_asked, favor_content, from_user_id, to_user_id, completed, cancelled };
+    const newFavor = { favor_title, favor_content, from_user_id, to_user_id };
 
-    console.log(newFavor)
+    fetch(`${Config.API_ENDPOINT}/favors`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(newFavor),
+    })
+      .then(res => {
+        if (!res.ok){
+          return res
+            .json()
+            .then(e => Promise.reject(e));
+        }
 
-    this.context.addFavor(newFavor);
-    this.onSubmitSuccess();
+        return res.json();
+      })
+      .then(res => {
+        this.context.addFavor(res);
+        this.onSubmitSuccess();
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   onSubmitSuccess = () => {
@@ -48,8 +70,68 @@ export class NewFavorPage extends Component {
     const destination = `/favors`;
     history.push(destination);
   }
-  
+
+  updateFavorTitle(title){
+    this.setState({
+      favor_title: {
+        value: title,
+        touched: true
+      }
+    })
+  }
+  validateFavorTitle(){
+    const favorTitle = this.state.favor_title.value.trim();
+    const minLength = 6;
+
+    if (favorTitle.length === 0){
+      return 'Favor Title is required';
+    } else if (favorTitle.length < minLength){
+      return `Favor Title must be at least ${minLength} characters long`;
+    }
+  }
+
+  updateFavorContent(content){
+    this.setState({
+      favor_content: {
+        value: content,
+        touched: true
+      }
+    })
+  }
+  validateFavorContent(){
+    const favorContent = this.state.favor_content.value.trim();
+    const minLength = 10;
+
+    if (favorContent.length === 0){
+      return 'Content is required';
+    } else if (favorContent.length < minLength){
+      return `Content must be at least ${minLength} characters long`;
+    }
+  }
+
+  updateFavorTarget(userId){
+    this.setState({
+      to_user_id: {
+        value: parseInt(userId),
+        touched: true
+      }
+    })
+  }
+  validateFavorTarget(){
+    const favorTarget = this.state.to_user_id.value;
+
+    if (favorTarget === "0"){
+      return `You must select a Favor recipient`
+    }
+  }
+
   render() {
+    console.log(this.state)
+
+    const titleError = this.validateFavorTitle();
+    const contentError = this.validateFavorContent();
+    const targetError = this.validateFavorTarget();
+
     return (
       <div id="newFavorPage">
         <form
@@ -64,12 +146,17 @@ export class NewFavorPage extends Component {
               <label htmlFor="favorTitle">
                 Title *
               </label>
+                
               <input
                 required
                 type="text"
                 id="favorTitle"
                 name="favorTitle"
+                onChange={e => this.updateFavorTitle(e.target.value)}
               />
+              {this.state.favor_title.touched && (
+                <ValidationError message={titleError}/>
+              )}
             </div>
             
             <div className="inputSect">
@@ -80,7 +167,11 @@ export class NewFavorPage extends Component {
                 type="text"
                 id="favorContent"
                 name="favorContent"
+                onChange={e => this.updateFavorContent(e.target.value)}
               />
+              {this.state.favor_content.touched && (
+                <ValidationError message={contentError}/>
+              )}
             </div>
 
             <div className="inputSect">
@@ -91,30 +182,48 @@ export class NewFavorPage extends Component {
                 required
                 id="favorTo"
                 name="favorTo"
+                onChange={e => this.updateFavorTarget(e.target.value)}
               >
-                <option>Select a user...</option>
-                {STORE.users.map(u => {
+                <option
+                  key={0}
+                  value={0}
+                >
+                  Select a user...
+                </option>
+                {this.context.allUsers.map(u => {
                   if (u.id !== this.context.user.id){
                     return (
-                      <option key={u.id}>
+                      <option
+                        key={u.id}
+                        value={u.id}
+                      >
                         {u.username}
                       </option>  
                     )
                 }})}
               </select>
+
+              {this.state.to_user_id.touched && (
+                <ValidationError message={targetError}/>
+              )}
             </div>
 
             <input
               type="submit"
               className="btn"
               value="Submit"
+              disabled={
+                this.validateFavorTitle() ||
+                this.validateFavorContent() ||
+                this.validateFavorTarget()
+              }
             />
             
           </fieldset>
         </form>
       </div>
-    )
+    );
   }
 }
 
-export default NewFavorPage
+export default NewFavorPage;

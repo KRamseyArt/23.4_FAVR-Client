@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './AboutPage.css'
+import './AboutPage.css';
 
 export class AboutPage extends Component {
   render() {
@@ -81,4 +81,4 @@ export class AboutPage extends Component {
   }
 }
 
-export default AboutPage
+export default AboutPage;

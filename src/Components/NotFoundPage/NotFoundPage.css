@@ -1,0 +1,17 @@
+#notFound {
+  height: 100vh;
+  background: darkred;
+  /* padding: 20px; */
+}
+
+#notFound h3 {
+  color: white;
+  background: red;
+  font-size: 48px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+#notFound p {
+  color: white;
+  margin-bottom: 20px;
+}

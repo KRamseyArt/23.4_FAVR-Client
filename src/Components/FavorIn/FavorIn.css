@@ -1,6 +1,8 @@
 .Favor {
   list-style-type: none;
-  margin: 20px;
+}
+.simpleTag {
+  margin: 20px 20px 0 20px;
   background: #ddd;
   border-radius: 5px;
   display: flex;
@@ -8,10 +10,22 @@
   height: 100%;
   position: relative;
 }
+.dateAsked {
+  background: cornflowerblue;
+  color: white;
+  min-width: 300px;
+  padding: 5px;
+}
 .favorInfo {
   align-self: center;
+}
+.infoText {
+  max-width: 70%;
   margin: 10px auto;
-  max-width: 60%;
+}
+.altUser {
+  font-weight: bold;
+  color: blue;
 }
 .favorComplete {
   position: absolute;
@@ -38,4 +52,20 @@
 .favorQuit:hover {
   cursor: pointer;
   background: darkred;
+}
+
+.details {
+  margin: 0px;
+  width: 100%;
+  border-radius: 0%;
+}
+.detailTag {
+  background: #555;
+  color: white;
+  margin: -5px 20px;
+  border: #555;
+  min-width: 300px;
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+  /* border: 2px solid #999; */
 }

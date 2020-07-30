@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './ProfileHeader.css'
-import Context from '../../Context'
+import './ProfileHeader.css';
+import Context from '../../Context';
 
-import EditProfileForm from '../EditProfileForm/EditProfileForm'
+import EditProfileForm from '../EditProfileForm/EditProfileForm';
 
 export class ProfileHeader extends Component {
   static contextType = Context;
@@ -13,16 +13,15 @@ export class ProfileHeader extends Component {
     this.state = {
       edit: false,
       height: "150px"
-    }
+    };
   }
 
   toggleEditProfile = () => {
-    let { edit } = this.state;
     this.setState({ edit: !this.state.edit });
   }
   editProfile = () => {
     if (this.state.edit === true){
-      return <EditProfileForm />
+      return <EditProfileForm />;
     } else {
       return (
         <button
@@ -31,31 +30,31 @@ export class ProfileHeader extends Component {
         >
           +
         </button>
-      )
+      );
     }
   }
 
   getStyle = () => {
     if (this.context.user.img_link){
       return ({
-         background: `url("${this.context.user.img_link}")`,
+         backgroundImage: `url("${this.context.user.img_link}")`,
          backgroundSize: 'cover',
          backgroundPosition: "center",
          backgroundRepeat: "no-repeat",
          width: "100%",
          height: `${this.state.height}`,
          position: "relative"
-      })
+      });
     } else {
       return ({
-        background: `url("https://via.placeholder.com/1920x1080/999/fff?text=Profile+Image")`,
+        backgroundImage: `url("https://via.placeholder.com/1920x1080/999/fff?text=Please+Add+Link+To+Profile+Header+Image")`,
         backgroundSize: 'cover',
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         width: "100%",
         height: `${this.state.height}`,
         position: "relative" 
-     })
+     });
     }
   }
 
@@ -67,9 +66,9 @@ export class ProfileHeader extends Component {
       >
         { this.editProfile() }
       </div>
-    )
+    );
   }
 }
 
-export default ProfileHeader
+export default ProfileHeader;
 
