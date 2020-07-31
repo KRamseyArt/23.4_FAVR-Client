@@ -7,6 +7,7 @@ const Context = React.createContext({
   setUser: () => {},
   addFavor: () => {},
   setFavors: () => {},
+  patchUser: () => {},
   cancelFavor: () => {},
   deleteFavor: () => {},
   getAllUsers: () => {},

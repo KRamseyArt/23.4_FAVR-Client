@@ -73,7 +73,7 @@ export class App extends Component {
 
   setUser = (user) => {
     this.setState({
-      user
+      user: {...this.state.user, ...user}
     });
   }
   getAllUsers = (allUsers) => {
@@ -91,15 +91,38 @@ export class App extends Component {
       favors
     });
   }
-  cancelFavor = (favorId) => {
-    this.state.favors.map(f => {
-      if (f.id === favorId){
-        f.cancelled = true;
-      }
-    });
-    this.setState({
-      favors: [...this.state.favors]
-    });
+  cancelFavor = (favor) => {
+    const favorPatch = {
+      id: favor.id,
+      completed: favor.completed,
+      cancelled: true,
+      end_date: new Date()
+    }
+
+    console.log(favorPatch);
+
+    fetch (`${Config.API_ENDPOINT}/favors/${favor.id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify( favorPatch )
+        
+    })
+      .then(res => {
+        this.setState({
+          favors: this.state.favors.map(f =>{
+            if (f.id === favorPatch.id){
+              return favorPatch;
+            }
+            return f;
+          })
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      })
   }
   deleteFavor = (favorId) => {
     fetch (`${Config.API_ENDPOINT}/favors/${favorId}`, {
@@ -136,12 +159,17 @@ export class App extends Component {
         'content-type': 'application/json',
         'Authorization': `Bearer ${TokenService.getAuthToken()}`
       },
-      body: JSON.stringify({ favorPatch })
+      body: JSON.stringify( favorPatch )
         
     })
       .then(res => {
         this.setState({
-          favors: [...this.state.favors]
+          favors: this.state.favors.map(f =>{
+            if (f.id === favorPatch.id){
+              return favorPatch;
+            }
+            return f;
+          })
         });
       })
       .catch(error => {
@@ -189,6 +217,7 @@ export class App extends Component {
       addFavor: this.addFavor,
       setUser: this.setUser,
       setFavors: this.setFavors,
+      patchUser: this.patchUser,
       getAllUsers: this.getAllUsers,
       cancelFavor: this.cancelFavor,
       deleteFavor: this.deleteFavor,

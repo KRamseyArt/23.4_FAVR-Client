@@ -20,7 +20,6 @@ export class FavorIn extends Component {
   }
 
   getUsername = () => {    
-    console.log(this.context.allUsers);
     let askedByID = this.context.allUsers.filter(u => 
       u.id === this.props.favor.from_user_id
     )[0] || { username: "Null" };
@@ -71,7 +70,7 @@ export class FavorIn extends Component {
           </div>
           <button
             className="favorQuit"
-            onClick={() => this.context.cancelFavor(favor.id)}
+            onClick={() => this.context.cancelFavor(favor)}
           >
             X
           </button>

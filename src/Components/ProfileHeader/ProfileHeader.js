@@ -21,7 +21,19 @@ export class ProfileHeader extends Component {
   }
   editProfile = () => {
     if (this.state.edit === true){
-      return <EditProfileForm />;
+      return (
+        <>
+          <button
+            id="EditProfileBtn"
+            onClick={() => this.toggleEditProfile()}
+          >
+            +
+          </button>
+          <EditProfileForm
+            toggle={this.toggleEditProfile}
+          />
+        </>
+      );
     } else {
       return (
         <button

@@ -54,10 +54,7 @@ export class FavorsPage extends Component {
                     <FavorOut
                       id={f.id}
                       key={f.id}
-                      title={f.favor_title}
-                      content={f.favor_content}
-                      to={f.to_user_id}
-                      assigned_date={f.assigned_date}
+                      favor={f}
                     />
                   )
                 }
