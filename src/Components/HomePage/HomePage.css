@@ -3,6 +3,7 @@
 }
 #HomeInfo li {
   list-style-type: none;
+  display: relative;
 }
 #HomeInfo li h3 {
   background: #5D1EC2;
@@ -13,4 +14,18 @@
 #HomeInfo li p {
   margin: 10px 20px;
   line-height: 2.5rem;
+}
+
+@media only screen and (min-width: 768px){
+  #HomeInfo li {
+    display: flex;
+    flex-direction: column;
+  }
+  #HomeInfo li h3 {
+    width: 100%;
+  }
+  #HomeInfo li p {
+    width: 700px;
+    align-self: center;
+  }
 }

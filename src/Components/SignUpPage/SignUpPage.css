@@ -29,3 +29,9 @@
 .acct {
   min-width: calc(90% - 40px);
 }
+
+@media only screen and (min-width:768px){
+  #accountForm fieldset {
+    width: 700px;
+  }
+}

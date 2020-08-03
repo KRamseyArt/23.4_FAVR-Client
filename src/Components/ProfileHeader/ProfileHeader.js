@@ -65,9 +65,9 @@ export class ProfileHeader extends Component {
       });
     } else {
       return ({
-        backgroundImage: `url("https://via.placeholder.com/1920x1080/999/fff?text=Please+Add+Link+To+Profile+Header+Image")`,
+        backgroundImage: `url("https://wallpapercave.com/wp/yKBmQ7B.jpg")`,
         backgroundSize: 'cover',
-        backgroundPosition: "center",
+        backgroundPosition: "top",
         backgroundRepeat: "no-repeat",
         width: "100%",
         height: `${this.state.height}`,

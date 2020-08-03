@@ -97,7 +97,7 @@ export class RankMeter extends Component {
     } else if (this.percentDone() + this.percentToDo() + this.percentCancelled()  === this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()) {
       title = "Equalizer";
     } else {
-      title = "Undefined";
+      title = "Newbie";
     }
 
     return title;
@@ -127,8 +127,8 @@ export class RankMeter extends Component {
         <div id="rankBadge">
           <h4>
             {this.percentDone() + this.percentToDo() + this.percentCancelled() > this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()
-              ? `${this.getOverallRank()}: ${this.percentDone() + this.percentToDo() + this.percentCancelled()}%`
-              : `${this.getOverallRank()}: ${this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()}%`
+              ? `${this.getOverallRank()}: {${this.percentDone() + this.percentToDo() + this.percentCancelled()}%`
+              : `${this.getOverallRank()}: ${(this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()) || 0}%`
             }
           </h4>
         </div>
