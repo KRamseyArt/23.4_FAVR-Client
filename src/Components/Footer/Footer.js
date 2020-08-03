@@ -14,7 +14,7 @@ export class Footer extends Component {
           id="aboutBtn"
         >
           <button className="btn">
-            About the App
+            About the Author
           </button>
         </Link>
       </footer>

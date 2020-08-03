@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
 
 import './App.css';
-import STORE from './STORE';
 import Config from './Config';
 import Context from './Context';
 

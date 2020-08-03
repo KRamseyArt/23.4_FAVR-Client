@@ -1,5 +1,5 @@
 #RankMeter {
-  margin: 20px auto;
+  /* margin: 20px auto; */
   display: flex;
   background: white;
   padding: 10px 0;
@@ -12,24 +12,32 @@
   width: 100%;
 }
 #Completed {
-  background: limegreen;
+  background: #96E64E;
   margin-left: 0;
 }
 #ToDo {
-  background: green;
+  background: #36A32A;
+  margin-left: 0;
+}
+#Cancelled {
+  background: rgb(16, 73, 19);
   margin-left: 0;
 }
 #Pending {
-  background: rgb(54, 131, 231);
+  background: #2071EB;
   margin-right: 0;
 }
 #Done4Me {
-  background: rgb(115, 186, 243);
+  background: #20BEEB;
+  margin-right: 0;
+}
+#Cancelled4Me {
+  background: rgb(15, 81, 167);
   margin-right: 0;
 }
 
 #rankBadge {
-  background: orange;
+  background: #E9B444;
   padding: 10px 20px;
   border-radius: 5px;
 }

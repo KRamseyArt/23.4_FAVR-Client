@@ -90,7 +90,7 @@ export class LogInPage extends Component {
 
             <input
               type="submit"
-              className="btn"
+              className="acct btn"
               value="Log In"
             />
             

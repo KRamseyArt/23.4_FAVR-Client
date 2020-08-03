@@ -2,8 +2,8 @@
   list-style-type: none;
 }
 .simpleTag {
-  margin: 20px 20px 0 20px;
-  background: #ddd;
+  margin: 20px auto 0 auto;
+  background: #daccf0;
   border-radius: 5px;
   display: flex;
   min-width: 300px;
@@ -11,13 +11,16 @@
   position: relative;
 }
 .dateAsked {
-  background: cornflowerblue;
+  background-color: #5d1ec2;
+  background-image: url("../../images/black-twill.png");
   color: white;
   min-width: 300px;
   padding: 5px;
+  border-radius: 5px 5px 0 0;
 }
 .favorInfo {
   align-self: center;
+  width: 100%;
 }
 .infoText {
   max-width: 70%;
@@ -31,14 +34,15 @@
   position: absolute;
   height: 100%;
   width: 50px;
-  background: green;
+  background: #36A32A;
   margin-left: 0;
   border: none;
   border-radius: 5px 0 0 5px;
 }
 .favorComplete:hover {
+  color: white;
   cursor: pointer;
-  background: darkgreen;
+  background: #96E64E;
 }
 .favorQuit {
   position: absolute;
@@ -50,22 +54,31 @@
   border-radius: 0 5px 5px 0;
 }
 .favorQuit:hover {
+  color: white;
   cursor: pointer;
-  background: darkred;
+  background: rgb(255, 100, 100);
 }
 
 .details {
   margin: 0px;
   width: 100%;
-  border-radius: 0%;
+  border-radius: 0 0 5px 5px;
 }
 .detailTag {
-  background: #555;
+  background: #484A47;
   color: white;
-  margin: -5px 20px;
-  border: #555;
+  margin: -5px 0 0 0;
+  border: #daccf0;
   min-width: 300px;
-  padding: 10px;
+  padding: 15px 10px 10px 10px;
   border-radius: 0 0 5px 5px;
   /* border: 2px solid #999; */
+}
+.fa {
+  color: white;
+  font-size: 26px;
+}
+.fa-thumbs-up {
+  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
 }

@@ -1,6 +1,21 @@
 #Hero {
-  background: #555;
-  color: white;
+  background: url('../../images/FAVR_Header.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  min-height: 250px;
+}
+
+#HeroText {
+  background-image: linear-gradient(to left, #e9b544af,white,white, #e9b544af);
+  border-radius: 5px;
+  color: #484A47;
+  position: absolute;
   width: 100%;
-  padding: 50px;
+  bottom: 0;
+  padding: 10px;
+}
+#HeroText h1 {
+  color: #5D1EC2;
 }

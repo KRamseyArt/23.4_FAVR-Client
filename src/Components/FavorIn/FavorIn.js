@@ -52,7 +52,7 @@ export class FavorIn extends Component {
             className="favorComplete"
             onClick={() => this.context.completeFavor(favor)}
           >
-            O
+           <span className="fa fa-thumbs-up" />
           </button> 
           <div className="favorInfo">
             <p className="dateAsked">{formattedDate}</p>
@@ -72,7 +72,7 @@ export class FavorIn extends Component {
             className="favorQuit"
             onClick={() => this.context.cancelFavor(favor)}
           >
-            X
+            <span className="fa fa-thumbs-down" />
           </button>
         </div>
         { this.state.viewDetails

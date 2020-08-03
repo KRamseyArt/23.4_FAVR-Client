@@ -1,13 +1,16 @@
 #HomeInfo {
   padding: 0;
-  margin: 10px 50px;
 }
 #HomeInfo li {
   list-style-type: none;
-  line-height: 3rem;
-  margin: 10px auto 50px auto;
 }
 #HomeInfo li h3 {
-  background: #999;
-  color: white;
+  background: #5D1EC2;
+  color: #FFE880;
+  font-size: 24px;
+  padding: 10px 0;
+}
+#HomeInfo li p {
+  margin: 10px 20px;
+  line-height: 2.5rem;
 }

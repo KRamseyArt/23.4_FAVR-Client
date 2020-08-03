@@ -115,7 +115,7 @@ export class SignUpPage extends Component {
 
             <input
               type="submit"
-              className="btn"
+              className="acct btn"
               value="Sign Up"
             />
             

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import './FavorOut.css';
-import STORE from '../../STORE';
 import Context from '../../Context';
 
 export class FavorOut extends Component {
@@ -67,7 +66,7 @@ export class FavorOut extends Component {
             className="favorOutQuit"
             onClick={() => this.context.deleteFavor(favor.id)}
           >
-            X
+            <span className="fa fa-times" />
           </button>
         </div>
         { this.state.viewDetails

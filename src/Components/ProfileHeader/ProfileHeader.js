@@ -16,6 +16,12 @@ export class ProfileHeader extends Component {
     };
   }
 
+  renderEdit = () => {
+    return <span className="fa fa-edit" />;
+  }
+  renderClose = () => {
+    return <span className="fa fa-times" />;
+  }
   toggleEditProfile = () => {
     this.setState({ edit: !this.state.edit });
   }
@@ -24,10 +30,10 @@ export class ProfileHeader extends Component {
       return (
         <>
           <button
-            id="EditProfileBtn"
+            id="EditProfileBtnClose"
             onClick={() => this.toggleEditProfile()}
           >
-            +
+            {!this.state.edit ? this.renderEdit() : this.renderClose()}
           </button>
           <EditProfileForm
             toggle={this.toggleEditProfile}
@@ -40,7 +46,7 @@ export class ProfileHeader extends Component {
           id="EditProfileBtn"
           onClick={() => this.toggleEditProfile()}
         >
-          +
+          {!this.state.edit ? this.renderEdit() : this.renderClose()}
         </button>
       );
     }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import './ProfilePage.css';
-import Config from '../../Config';
 import Context from '../../Context';
 
 import RankMeter from '../RankMeter/RankMeter.js';
@@ -52,6 +51,20 @@ export class ProfilePage extends Component {
 
     return count;
   }
+  numFavorsUserCancelled = () => {
+    // returns total favors asked by others from user, that user has marked 'cancelled'
+    let count = 0;
+    let userFavors = this.context.favors
+      .filter(f => f.to_user_id === this.context.user.id);
+
+    userFavors.forEach(f => {
+      if (f.cancelled){
+        count++;
+      }
+    });
+
+    return count;
+  }
   numFavorsUserHasLeftToDo = () => {
     // returns total count of favors asked by others from user, that user has not marked 'complete' or 'cancelled'
     let count = 0;
@@ -84,6 +97,20 @@ export class ProfilePage extends Component {
 
     return count;
   }
+  numUserFavorsCancelledByOthers = () => {
+    // counts how many favors asked of others by user that have been marked 'cancelled'
+    let count = 0;
+    let favorsAsked = this.context.favors
+      .filter(f => f.from_user_id === this.context.user.id);
+
+    favorsAsked.forEach(f => {
+      if (f.cancelled){
+        count++;
+      }
+    });
+
+    return count;
+  }
   numUserFavorsCompletedByOthers = () => {
     // counts how many favors asked of others by user that have been marked 'completed'
     let count = 0;
@@ -107,30 +134,41 @@ export class ProfilePage extends Component {
         <ProfileHeader />
 
         <div id="profileData">
-          <h1>{ user.username }</h1>
-          <p>{ user.about_me }</p>
-          <RankMeter />
+          <div>
+            <h1>{ user.username }</h1>
+            <p>{ user.about_me }</p>
+          </div>
         </div>
+        
+        <RankMeter />
 
         <div id="profileFavors">
-          <div className="reminder totalIn">
-            <h4>Total Favors Given To Me: { this.numFavorsGivenToUser() }</h4>
+          <div className="total in">
+            <h3>Total Favors Asked of Me by Others: { this.numFavorsGivenToUser() }</h3>
+            <div className="reminder done">
+              <h4>Favors I've Completed: { this.numFavorsUserCompleted() }</h4>
+            </div>
+            <div className="reminder toDo">
+              <h4>Favors I Still Have To Do: { this.numFavorsUserHasLeftToDo() }</h4>
+            </div>
+            <div className="reminder cancelled">
+              <h4>Favors I've Cancelled: { this.numFavorsUserCancelled() }</h4>
+            </div>
           </div>
-          <div className="reminder done">
-            <h4>Favors I've Completed: { this.numFavorsUserCompleted() }</h4>
+          
+          <div className="total out">
+            <h3>Total Favors I've Asked Of Others: { this.numFavorsUserGaveOut() }</h3>
+            <div className="reminder done4me">
+              <h4>Favors Completed by Others: { this.numUserFavorsCompletedByOthers() }</h4>
+            </div>
+            <div className="reminder pending">
+              <h4>Favors Left To Do for Others: { this.numUserFavorsOthersHaveLeftToDo() }</h4>
+            </div>
+            <div className="reminder cancelled4me">
+              <h4>Favors Cancelled by Others: { this.numUserFavorsCancelledByOthers() }</h4>
+            </div>
           </div>
-          <div className="reminder toDo">
-            <h4>Favors I Still Have To Do: { this.numFavorsUserHasLeftToDo() }</h4>
-          </div>
-          <div className="reminder totalOut">
-            <h4>Total Favors I've Asked Of Others: { this.numFavorsUserGaveOut() }</h4>
-          </div>
-          <div className="reminder pending">
-            <h4>Favors Left To Do for Others: { this.numUserFavorsOthersHaveLeftToDo() }</h4>
-          </div>
-          <div className="reminder done4me">
-            <h4>Favors Completed by Others: { this.numUserFavorsCompletedByOthers() }</h4>
-          </div>
+          
         </div>
       </div>
     );

@@ -82,15 +82,18 @@ export class EditProfileForm extends Component {
     this.setState({
       img_link: {
         value: img_link,
-        touched: false
+        touched: true
       }
     });
   }
   validateImgLink(){
     const imgLink = this.state.img_link.value.trim();
+    const minLength = 8;
 
-    if (!imgLink.startsWith("https:")){
-      return 'Please make sure to link to a valid image URL';
+    if (imgLink.length < 8){
+      return `Image Link must be at least ${minLength} characters in length`;
+    } else if (!imgLink.includes("https://")){
+      return 'Please make sure to link to a valid image URL with "https://"';
     }
   }
 
@@ -137,17 +140,10 @@ export class EditProfileForm extends Component {
               />
             </div>
 
-            <button
-              className="btn"
-              onClick={() => this.state.visible = false}
-            >
-              Cancel
-            </button>
-
             <input
               type="submit"
               value="Submit"
-              className="btn"
+              className="acct btn"
             />
           </fieldset>
         </form>

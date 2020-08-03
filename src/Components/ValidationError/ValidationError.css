@@ -1,6 +1,6 @@
 .error {
   background: red;
-  min-width: 90%;
+  width: 90%;
   color: white;
   font-size: 12px;
 }

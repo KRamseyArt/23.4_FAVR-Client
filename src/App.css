@@ -6,7 +6,7 @@
 }
 
 #App {
-  background: #ddd;
+  background: #daccf0;
   min-height: 100vh;
   position: relative;
   padding-bottom: 50px;
@@ -14,18 +14,19 @@
 
 .btn {
   text-decoration: none;
-  background: #999;
+  background: #e9b444;
   border: none;
-  color: white;
+  color: black;
   margin: 0 10px;
-  padding: 5px 15px;
+  padding: 15px 15px;
   border-radius: 5px;
 }
 .btn:hover {
   cursor: pointer;
-  background: #555;
+  background: #ffe880;
 }
 .btn:disabled {
   cursor: default;
-  background: black;
+  color: white;
+  background: #484A47;
 }
