@@ -1,68 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# FAVR App
+[Live Demo](https://favr-app.kramseyart.vercel.app/)
 
-## Available Scripts
+#### Tech Used:
+- PostgreSQL
+- Express
+- ReactJS
+- NodeJS
+- CSS
 
-In the project directory, you can run:
+#### Summary:
+- The landing page displays an informational overview about how to use the application.
+![Landing Page Screenshot](./Screenshots/1_Landing.jpg)
 
-### `npm start`
+- User is able to create a new ccount by submitting a unique username, along with an email address and validated password.
+![Sign Up Screenshot](./Screenshots/2_SignUp.jpg)
+![Log In Screenshot](./Screenshots/3_LogIn.jpg)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Once logged in, user is directed to Favors page to view list of their current to-do list, as well as an aggregate list of favors they have tasked to other users
+- User can create new favors, to send to others, delete favors they've assigned to others, and mark favors on their personal to-do list as 'completed' or 'cancelled'
+![Favors Screenshot](./Screenshots/4_Favors.jpg)
+![Create Favor Screenshot](./Screenshots/5_NewFavor.jpg)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- User can review statistics on their personal account, as well as customize a header image and about_me section
+![Profile Page Screenshot](./Screenshots/6_ProfilePage.jpg)
+![Edit Profile Screenshot](./Screenshots/7_EditProfile.jpg)
 
-### `npm test`
+- Visitors can view information about the app's creator by clicking the button in the bottom-right corner of all pages at any time
+![About The Author Screenshot](./Screenshots/8_AboutAuthor.jpg)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# API Documentation:
+- [API Repo](https://github.com/KRamseyArt/23.5_Favr-API)
+- [Live API](https://radiant-wildwood-06130.herokuapp.com/)
+#### Users
+- (/)
+  - GET: Returns a list of all current users registered
+  - POST: Create new user with params `{ email, username, password }`
+- (/:userId)
+  - GET: Return a single user
+  - PATCH: Edit `{  about_me, profile_img, date_modified }` of a single user, given a specific ID and valid authentication
+  - DELETE: Remove a user from the database given a specific user ID and valid authentication
+- (/:userId/favors)
+  - GET: Return all Favors assigned to a user, given a specific user ID
+  - POST: Add a new Favor to a user's collection with params `{ favor_title, favor_content, to_user_id, from_user_id }`
+#### Favors
+- (/)
+  - GET: Returns all Favors stored in the database
+  - POST: Add a Favor to the database with params `{ favor_title, favor_content, to_user_id, from_user_id }`
+- (/:favorId)
+  - GET: Return a specific Favor, given a specific Favor ID
+  - PATCH: Edit a specific Favor with params `{ completed, cancelled, end_date }`, given a specific Favor ID and valid authentication
+  - DELETE: Remove a specific Favor from the database, given a specific Favor ID and valid authentication
