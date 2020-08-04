@@ -1,15 +1,36 @@
+#ProfilePage {
+  padding: 0 0 15px 0;
+}
+#profileData {
+  background-color: #5d1ec2;
+  background-image: url("../../images/black-twill.png");
+  padding: 10px;
+}
+#profileData h1 {
+  color: #FFE880;
+}
+#profileData p {
+  color: white;
+}
 #profileFavors {
   display: block;
 }
+
+.total h3 {
+  padding: 10px;
+  background: #5D1EC2;
+  color: white;
+}
 .reminder {
   flex: 2;
-  
   padding: 10px;
-  margin: 10px auto;
 }
 
 .done {
   background: limegreen;
+}
+.cancelled {
+  background: rgb(16, 73, 19);
 }
 .toDo {
   background: green;
@@ -19,4 +40,35 @@
 }
 .done4me {
   background: rgb(115, 186, 243);
+}
+.cancelled4me {
+  background: rgb(15, 81, 167);
+}
+
+@media only screen and (min-width: 768px) {
+  #profileData div{
+    width: 700px;
+  }
+  
+  #profileFavors {
+    display: flex;
+    /* padding: 10px; */
+    width: 100%;
+  }
+
+  .total {
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .total h3 {
+    border-radius: 5px 5px 0 0;
+  }
+  .cancelled { 
+    border-radius: 0 0 5px 5px;
+  }
+  .cancelled4me { 
+    border-radius: 0 0 5px 5px;
+  }
 }

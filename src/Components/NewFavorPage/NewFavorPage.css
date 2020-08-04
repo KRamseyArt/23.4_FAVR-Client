@@ -5,9 +5,11 @@
   background: white;
   border: none;
   border-radius: 5px;
+  padding-bottom: 20px;
 }
 #newFavorForm legend {
-  background: #999;
+  background-color: #5d1ec2;
+  background-image: url("../../images/black-twill.png");
   color: white;
   border: 2px solid white;
   border-radius: 5px;
@@ -39,4 +41,10 @@
   width: 90%;
   border: 2px solid #ddd;
   border-radius: 5px;
+}
+
+@media only screen and (min-width: 768px){
+  #newFavorPage {
+    width: 700px;
+  }
 }

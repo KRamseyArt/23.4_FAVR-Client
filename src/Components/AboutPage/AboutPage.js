@@ -7,11 +7,10 @@ export class AboutPage extends Component {
     return (
       <div id="AboutPage">
         <div id="profileCard">
-          <div
-            id="profileImg"
-          />
+          
 
           <div id="profileContact">
+            <div id="profileImg"/>
             <h3>Kalin Ramsey</h3>
             <p>Tucson, AZ</p>
           </div>
@@ -66,13 +65,11 @@ export class AboutPage extends Component {
         </div>
 
         <div id="aboutDetails">
-          <h3>About FAVR</h3>
+          <h3>About the Author</h3>
           <ul>
-            <li>As a Software Engineer with a background in Illustration and UI / UX design, Kalin Ramsey takes pride in his abilty to create apps that are both functional and attractive.</li>
-            <li>FAVR was created as a way to help users keep track of the various tasks that they negotiate with their friends on a day-to-day basis.</li>
-            <li>To address a mass-spread bystander effect created by the partial anonymity of social networking, FAVR is a platform that allows users to target specific individuals and ask them directly.</li>
-            <li>Being able to see the balance between favors performed for and by specific people also creates more incentive to accept a favor from someone, or provides justification in rejecting their proposal.</li>
-            <li>Provided a visual representaion of the give-and-take relation with others, users can be better prepared to avoid being taken advantage of, or the monitor their own dependence on others.</li>
+            <li>As a Software Engineer with a background in Illustration, Branding, and UI / UX design, Kalin Ramsey takes pride in his abilty to create apps that are both functional and attractive.</li>
+            <li>With an education and mentorship from Thinkful's online Software Engineering program, Kalin is currently exploring new opportunities within the tech sector to combine his technical and artistic craft.</li>
+            <li>To get in touch and view recent work, select any option from the menu above</li>
           </ul>
         </div>
         

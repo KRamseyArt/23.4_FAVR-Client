@@ -23,11 +23,13 @@ export class RankMeter extends Component {
     let favorsGivenToMe = this.context.favors.filter(f => 
       f.to_user_id === this.context.user.id
     );
-    let favorsDone = favorsGivenToMe.filter(f =>
-      f.completed === true
-    );
-    // console.log(`Percent of Favors I Completed: ${Math.floor(favorsDone.length / totalFavors * 100)}%`);
-    return Math.floor(favorsDone.length / totalFavors * 100);
+    let favorsDone = 0;
+    favorsGivenToMe.forEach(f => {
+      if (f.completed){
+        favorsDone++;
+      }
+    })
+    return Math.ceil(favorsDone / totalFavors * 100);
   }
   percentToDo = () => {
     // returns percent of favors user has left to do (not marked 'completed' or 'cancelled') out of total favors in/out
@@ -37,8 +39,17 @@ export class RankMeter extends Component {
       && f.completed === false
       && f.cancelled === false
     );
-    // console.log(`Percent of Favors I Need to Do: ${favorsAsked.length/totalFavors * 100}%`);
-    return Math.floor(favorsAsked.length/totalFavors * 100);
+    return Math.ceil(favorsAsked.length/totalFavors * 100);
+  }
+  percentCancelled = () => {
+    // returns percent of favors user has cancelled
+    let totalFavors = this.getTotalFavors();
+    let favorsAskedCancelled = this.context.favors.filter(f =>
+      f.to_user_id === this.context.user.id
+      && f.cancelled === true  
+    );
+
+    return Math.ceil(favorsAskedCancelled.length / totalFavors * 100);
   }
   percentPending = () => {
     // returns percent of favors user has asked of others out of total favors in/out
@@ -49,8 +60,7 @@ export class RankMeter extends Component {
       && f.cancelled === false
     );
 
-    // console.log(`Percent of Favors I've Asked for: ${favorsAsked.length/totalFavors * 100}%`);
-    return Math.floor(favorsAsked.length/totalFavors * 100);
+    return Math.ceil(favorsAsked.length/totalFavors * 100);
   }
   percentDone4Me = () => {
     // returns percent of total favors in/out that user asked of others that were marked 'completed'
@@ -61,21 +71,29 @@ export class RankMeter extends Component {
     let favorsDone = favorsAsked.filter(f =>
       f.completed === true
     );
-    // console.log(`Percent of Favors Others Completed For Me: ${Math.floor(favorsDone.length / totalFavors * 100)}%`);
-    return Math.floor(favorsDone.length / totalFavors * 100);
+    return Math.ceil(favorsDone.length / totalFavors * 100);
+  }
+  percentCancelled4Me = () => {
+    let totalFavors = this.getTotalFavors();
+    let favorsAsked = this.context.favors.filter(f =>
+      f.from_user_id === this.context.user.id
+      && f.cancelled === true  
+    );
+
+    return Math.ceil(favorsAsked.length / totalFavors * 100);
   }
 
   getOverallRank() {
     let title = "";
 
-    if (this.percentDone() + this.percentToDo() > this.percentPending() + this.percentDone4Me()){
+    if (this.percentDone() + this.percentToDo() + this.percentCancelled() > this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()){
       title = "Do-er";
-    } else if (this.percentDone() + this.percentToDo() < this.percentPending() + this.percentDone4Me()) {
+    } else if (this.percentDone() + this.percentToDo() + this.percentCancelled() < this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()) {
       title = "Task-er";
-    } else if (this.percentDone() + this.percentToDo() === this.percentPending() + this.percentDone4Me()) {
+    } else if (this.percentDone() + this.percentToDo() + this.percentCancelled()  === this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()) {
       title = "Equalizer";
     } else {
-      title = "Undefined";
+      title = "Newbie";
     }
 
     return title;
@@ -85,34 +103,46 @@ export class RankMeter extends Component {
     return (
       <div id="RankMeter">
         <div
-          id="Completed"
+          id="Cancelled"
           className="meter"
-          style={{ width: this.percentDone()+"%" }}
+          style={{ width: this.percentCancelled()+"%" }}
         />
         <div
           id="ToDo"
           className="meter"
           style={{ width: this.percentToDo()+"%" }}
         />
+        <div
+          id="Completed"
+          className="meter"
+          style={{ width: this.percentDone()+"%" }}
+        />
+        
 
         <div id="rankBadge">
           <h4>
-            {this.percentDone() + this.percentToDo() > this.percentPending() + this.percentDone4Me()
-              ? `${this.getOverallRank()}: ${this.percentDone() + this.percentToDo()}%`
-              : `${this.getOverallRank()}: ${this.percentPending() + this.percentDone4Me()}%`
+            {this.percentDone() + this.percentToDo() + this.percentCancelled() > this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()
+              ? `${this.getOverallRank()}: ${this.percentDone() + this.percentToDo() + this.percentCancelled()}%`
+              : `${this.getOverallRank()}: ${(this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()) || 0}%`
             }
           </h4>
         </div>
 
+        
+        <div
+          id="Done4Me"
+          className="meter"
+          style={{ width: this.percentDone4Me()+"%" || 0 }}
+        />
         <div
           id="Pending"
           className="meter"
           style={{ width: this.percentPending()+"%" }}
         />
         <div
-          id="Done4Me"
+          id="Cancelled4Me"
           className="meter"
-          style={{ width: this.percentDone4Me()+"%" || 0 }}
+          style={{ width: this.percentCancelled4Me()+"%"}}
         />
       </div>
     )

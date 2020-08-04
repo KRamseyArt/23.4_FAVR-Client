@@ -16,48 +16,50 @@ export class FavorsPage extends Component {
 
     return (
       <div id="FavorsPage">
-        <h1>Favors To Do:</h1>
         <div className="favorList">
+          <h1 id="forMe">Favors To Do:</h1>
+
           <ul>
             {favors.map(f => {
+              let favorIn;
               if (
                 f.to_user_id === this.context.user.id
                 && f.cancelled === false
                 && f.completed === false
               ){
-                return (
+                favorIn = 
                   <FavorIn
                     id={f.id}
                     key={f.id}
                     favor={f}
                   />
-                )
               }
+              return favorIn;
             })}
           </ul>
         </div>
-
-        <h1>Favors For Others:</h1>
-        <Link to="/new-favor">
-          <button className="btn">Create New</button>
-        </Link>
-
+        
         <div className="favorList">
+          <h1 id="forThem">Favors For Others:</h1>
+          <Link to="/new-favor">
+            <button className="fav btn">Create New</button>
+          </Link>
             <ul>
               {favors.map(f => {
+                let favorOut;
                 if (
                   f.from_user_id === this.context.user.id
                   && f.completed === false
                   && f.cancelled === false
                 ){
-                  return (
+                  favorOut =
                     <FavorOut
                       id={f.id}
                       key={f.id}
                       favor={f}
                     />
-                  )
                 }
+                return favorOut;
               })}
             </ul>
         </div>

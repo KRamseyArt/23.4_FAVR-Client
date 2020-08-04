@@ -2,8 +2,8 @@
   list-style-type: none;
 }
 .simpleTagOut {
-  margin: 20px 20px 0 20px;
-  background: #ddd;
+  margin: 20px auto 0 auto;
+  background: #daccf0;
   border-radius: 5px;
   display: flex;
   min-width: 300px;
@@ -12,7 +12,8 @@
   /* display: flex; */
 }
 .dateOutAsked {
-  background: cornflowerblue;
+  background-color: #5d1ec2;
+  background-image: url("../../images/black-twill.png");
   color: white;
   min-width: 300px;
   padding: 5px 10px;
@@ -29,10 +30,6 @@
 }
 .infoOutText p, .infoOutText h4 {
   text-align: left;
-}
-.altUser {
-  font-weight: bold;
-  color: blue;
 }
 .favorOutQuit {
   position: absolute;
@@ -51,14 +48,5 @@
 .detailsOut {
   margin: 0px;
   width: 100%;
-  border-radius: 0 0 5px 5px;
-}
-.detailTag {
-  background: #555;
-  color: white;
-  margin: -5px 20px;
-  border: #555;
-  min-width: 300px;
-  padding: 10px;
   border-radius: 0 0 5px 5px;
 }

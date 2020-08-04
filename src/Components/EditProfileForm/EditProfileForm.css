@@ -1,5 +1,5 @@
 #EditProfileForm {
-  background: rgba(0,0,0,0.7);
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.7),rgba(0,0,0,0.7),rgba(0,0,0,0.7), rgba(0,0,0,0));
   padding: 10px;
 }
 
@@ -8,11 +8,20 @@
   margin: 20px;
   border: none;
   border-radius: 5px;
+  padding-bottom: 20px;
 }
 #EditProfileForm legend {
-  background: #999;
+  background-color: #5d1ec2;
+  background-image: url("../../images/black-twill.png");
   color: white;
   border: 2px solid white;
   border-radius: 5px;
   padding: 10px 20px;
+}
+
+@media only screen and (min-width: 768px){
+  #EditProfileForm fieldset{
+    width: 700px;
+    margin: 20px auto;
+  }
 }

@@ -1,13 +1,22 @@
 #demoCredentials {
-  background: white;
+  background-color: #5d1ec2;
+  background-image: url("../../images/black-twill.png");
   margin: 20px auto;
   padding: 10px;
   border-radius: 5px;
+  color: white;
 }
 #demoCredentials h4 {
+  color: #E9B444;
   margin-bottom: 10px;
   font-size: 20px;
 }
 #demoCredentials span {
   font-weight: bold;
+}
+
+@media only screen and (min-width:768px){
+  #demoCredentials {
+    width: 700px;
+  }
 }

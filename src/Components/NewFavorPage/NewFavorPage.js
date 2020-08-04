@@ -120,14 +120,12 @@ export class NewFavorPage extends Component {
   validateFavorTarget(){
     const favorTarget = this.state.to_user_id.value;
 
-    if (favorTarget === "0"){
+    if (favorTarget === 0 || favorTarget === ""){
       return `You must select a Favor recipient`
     }
   }
 
   render() {
-    console.log(this.state)
-
     const titleError = this.validateFavorTitle();
     const contentError = this.validateFavorContent();
     const targetError = this.validateFavorTarget();
@@ -191,16 +189,18 @@ export class NewFavorPage extends Component {
                   Select a user...
                 </option>
                 {this.context.allUsers.map(u => {
+                  let option;
                   if (u.id !== this.context.user.id){
-                    return (
+                    option = 
                       <option
                         key={u.id}
                         value={u.id}
                       >
                         {u.username}
                       </option>  
-                    )
-                }})}
+                  }
+                  return option
+                })}
               </select>
 
               {this.state.to_user_id.touched && (
@@ -210,7 +210,7 @@ export class NewFavorPage extends Component {
 
             <input
               type="submit"
-              className="btn"
+              className="acct btn"
               value="Submit"
               disabled={
                 this.validateFavorTitle() ||

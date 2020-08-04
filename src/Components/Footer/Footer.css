@@ -4,12 +4,15 @@
   position: absolute;
   width: 100%;
   bottom: 0;
-  background: white;
+  color: white;
+  background-color: #5d1ec2;
+  background-image: url("../../images/black-twill.png");
   padding: 10px;
 }
 
 #copyright {
   margin-left: 10px;
+  align-self: center;
 }
 
 #aboutBtn {
