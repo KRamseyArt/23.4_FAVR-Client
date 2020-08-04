@@ -14,7 +14,7 @@ export class HomePage extends Component {
         <Hero />
         <ul id="HomeInfo">
           <li>
-            <h3>Welcome to FAVR!</h3>
+            {/* <h3>Welcome to FAVR!</h3> */}
             <p>FAVR was developed as a way to help users keep track of the various tasks they dole out to others, and that others ask of themselves. By having a visual representation of the frequency with which others depend upon you, users are provided a tool to help gague and manage their social interactions.</p>
           </li>
           <li>

@@ -8,14 +8,14 @@
 }
 
 #HeroText {
-  background-image: linear-gradient(to left, #e9b544af,white,white, #e9b544af);
+  background: #5D1EC2;
   border-radius: 5px;
-  color: #484A47;
+  color: white;
   position: absolute;
   width: 100%;
   bottom: 0;
   padding: 10px;
 }
 #HeroText h1 {
-  color: #5D1EC2;
+  color: #FFE880;
 }
