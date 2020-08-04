@@ -4,6 +4,8 @@ import { Route, Switch } from 'react-router';
 import './App.css';
 import Config from './Config';
 import Context from './Context';
+import PrivateRoute from './Utils/PrivateRoute';
+import PublicOnlyRoute from './Utils/PublicOnlyRoute';
 
 import NavBar from './Components/NavBar/NavBar';
 import HomePage from './Components/HomePage/HomePage';
@@ -226,23 +228,23 @@ export class App extends Component {
           <NavBar />
 
           <Switch>
-            <Route
+            <PrivateRoute
               path="/new-favor"
               component={ NewFavorPage }
             />
-            <Route
+            <PrivateRoute
               path="/favors"
               component={ FavorsPage }
             />
-            <Route
+            <PrivateRoute
               path='/users/:userId'
               component={ ProfilePage }
             />
-            <Route
+            <PublicOnlyRoute
               path='/log-in'
               component={ LogInPage }
             />
-            <Route
+            <PublicOnlyRoute
               path='/sign-up'
               component={ SignUpPage }
             />
