@@ -126,8 +126,6 @@ export class NewFavorPage extends Component {
   }
 
   render() {
-    console.log(this.state)
-
     const titleError = this.validateFavorTitle();
     const contentError = this.validateFavorContent();
     const targetError = this.validateFavorTarget();

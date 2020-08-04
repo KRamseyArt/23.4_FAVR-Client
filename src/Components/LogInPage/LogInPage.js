@@ -40,7 +40,8 @@ export class LogInPage extends Component {
 
   onLoginSuccess = () => {
     const { history } = this.props;
-    const destination = `/users/${TokenService.readJwtToken().user_id}`;
+    this.context.handleSuccessfulLogin();
+    const destination = `/favors`;
     history.push(destination);
   }
   

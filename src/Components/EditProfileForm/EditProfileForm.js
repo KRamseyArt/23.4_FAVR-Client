@@ -31,8 +31,8 @@ export class EditProfileForm extends Component {
 
     const { img_link, about_me } = this.state;
     const userPatch = {
-      img_link: img_link.value,
-      about_me: about_me.value,
+      img_link: img_link.value !== "" ? img_link.value : this.context.user.img_link,
+      about_me: about_me.value !== "" ? about_me.value : this.context.user.about_me,
       date_modified: new Date()
     };
 
@@ -119,7 +119,6 @@ export class EditProfileForm extends Component {
                 <ValidationError message={imgLinkError} />
               )}
               <input
-                required
                 type="text"
                 name="profileImgLink"
                 id="profileImgLink"
@@ -132,7 +131,6 @@ export class EditProfileForm extends Component {
                 <ValidationError message={aboutMeError} />
               )}
               <textarea
-                required
                 type="text"
                 name="aboutMe"
                 id="aboutMe"

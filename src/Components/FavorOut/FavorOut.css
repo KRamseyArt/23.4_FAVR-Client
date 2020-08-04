@@ -31,10 +31,6 @@
 .infoOutText p, .infoOutText h4 {
   text-align: left;
 }
-.altUser {
-  font-weight: bold;
-  color: blue;
-}
 .favorOutQuit {
   position: absolute;
   height: 100%;

@@ -23,12 +23,12 @@
   width: 100%;
 }
 .infoText {
-  max-width: 70%;
+  max-width: 60%;
   margin: 10px auto;
 }
 .altUser {
   font-weight: bold;
-  color: blue;
+  color: #5d1ec2;
 }
 .favorComplete {
   position: absolute;

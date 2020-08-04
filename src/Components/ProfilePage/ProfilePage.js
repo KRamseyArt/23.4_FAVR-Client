@@ -9,9 +9,9 @@ import ProfileHeader from '../ProfileHeader/ProfileHeader';
 export class ProfilePage extends Component {
   static contextType = Context;
 
-  componentDidMount(){
-    this.context.handleSuccessfulLogin();
-  }
+  // componentDidMount(){
+  //   this.context.handleSuccessfulLogin();
+  // }
   numFavorsGivenToUser = () => {
     // tracks total favors asked by user of others, and asked by others of user
     let count = 0;
@@ -19,7 +19,6 @@ export class ProfilePage extends Component {
       .filter(f => f.to_user_id === this.context.user.id);
 
     userFavors.forEach(f => {
-      // console.log(f);
       count++;
     });
 

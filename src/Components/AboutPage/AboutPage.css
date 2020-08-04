@@ -67,7 +67,14 @@
 }
 
 @media only screen and (min-width: 768px){
+  #AboutPage { 
+    display: flex;
+  }
+  
   #profileCard, #aboutDetails {
-    width: 700px;
+    margin: 0 10px;
+  }
+  #profileCard {
+    display: block;
   }
 }

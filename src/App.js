@@ -98,8 +98,6 @@ export class App extends Component {
       end_date: new Date()
     }
 
-    console.log(favorPatch);
-
     fetch (`${Config.API_ENDPOINT}/favors/${favor.id}`, {
       method: 'PATCH',
       headers: {
@@ -149,8 +147,6 @@ export class App extends Component {
       cancelled: favor.cancelled,
       end_date: new Date()
     }
-
-    console.log(favorPatch);
 
     fetch (`${Config.API_ENDPOINT}/favors/${favor.id}`, {
       method: 'PATCH',
@@ -207,8 +203,6 @@ export class App extends Component {
     }
   }
   render() {
-    console.log(this.state);
-
     const contextValue = {
       user: this.state.user,
       allUsers: this.state.allUsers,

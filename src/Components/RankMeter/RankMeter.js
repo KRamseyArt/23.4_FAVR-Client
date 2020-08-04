@@ -29,7 +29,6 @@ export class RankMeter extends Component {
         favorsDone++;
       }
     })
-    // console.log(`Percent of Favors I Completed: ${Math.floor(favorsDone.length / totalFavors * 100)}%`);
     return Math.ceil(favorsDone / totalFavors * 100);
   }
   percentToDo = () => {
@@ -40,7 +39,6 @@ export class RankMeter extends Component {
       && f.completed === false
       && f.cancelled === false
     );
-    // console.log(`Percent of Favors I Need to Do: ${favorsAsked.length/totalFavors * 100}%`);
     return Math.ceil(favorsAsked.length/totalFavors * 100);
   }
   percentCancelled = () => {
@@ -62,7 +60,6 @@ export class RankMeter extends Component {
       && f.cancelled === false
     );
 
-    // console.log(`Percent of Favors I've Asked for: ${favorsAsked.length/totalFavors * 100}%`);
     return Math.ceil(favorsAsked.length/totalFavors * 100);
   }
   percentDone4Me = () => {
@@ -74,7 +71,6 @@ export class RankMeter extends Component {
     let favorsDone = favorsAsked.filter(f =>
       f.completed === true
     );
-    // console.log(`Percent of Favors Others Completed For Me: ${Math.floor(favorsDone.length / totalFavors * 100)}%`);
     return Math.ceil(favorsDone.length / totalFavors * 100);
   }
   percentCancelled4Me = () => {
@@ -104,7 +100,6 @@ export class RankMeter extends Component {
   }
   
   render() {
-    console.log(this.getTotalFavors());
     return (
       <div id="RankMeter">
         <div
@@ -127,7 +122,7 @@ export class RankMeter extends Component {
         <div id="rankBadge">
           <h4>
             {this.percentDone() + this.percentToDo() + this.percentCancelled() > this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()
-              ? `${this.getOverallRank()}: {${this.percentDone() + this.percentToDo() + this.percentCancelled()}%`
+              ? `${this.getOverallRank()}: ${this.percentDone() + this.percentToDo() + this.percentCancelled()}%`
               : `${this.getOverallRank()}: ${(this.percentPending() + this.percentDone4Me() + this.percentCancelled4Me()) || 0}%`
             }
           </h4>
